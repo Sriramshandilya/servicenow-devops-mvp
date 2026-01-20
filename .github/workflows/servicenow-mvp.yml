@@ -1,4 +1,4 @@
-name: ServiceNow DevOps MVP
+name: CI/CD Pipeline with ServiceNow Change
 
 on:
   push:
@@ -6,27 +6,63 @@ on:
       - main
 
 jobs:
+
+  plan:
+    name: Plan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Planning stage
+        run: |
+          echo "📋 Planning deployment..."
+          echo "Checking scope, impact, dependencies"
+          sleep 5
+          echo "✅ Plan completed"
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    needs: plan
+    steps:
+      - name: Build stage
+        run: |
+          echo "🏗️ Building application..."
+          sleep 5
+          echo "✅ Build successful"
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Test stage
+        run: |
+          echo "🧪 Running tests..."
+          sleep 5
+          echo "✅ Tests passed"
+
   deploy:
     name: Deploy to Production
     runs-on: ubuntu-latest
-
+    needs: test
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Simulate deployment
         run: |
-          echo "Deploying to production..."
+          echo "🚀 Deploying application..."
+          sleep 5
+          echo "✅ Deployment completed"
 
-      - name: ServiceNow DevOps Change Gate
+      - name: ServiceNow DevOps Change (Async)
         uses: ServiceNow/servicenow-devops-change@main
         with:
           instance-url: ${{ secrets.SN_INSTANCE_URL }}
-          tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
-          devops-integration-token: ${{ secrets.SN_DEVOPS_INTEGRATION_TOKEN }}
-          job-name: "Deploy to Production"
-          context-github: ${{ toJson(github) }}
-          # 🔑 KEY SETTINGS
+          tool-id: ${{ secrets.SN_TOOL_ID }}
+          devops-integration-token: ${{ secrets.SN_TOKEN }}
+          job-name: Deploy to Production
+
+          # 🔑 Async / Non-blocking
           abortOnChangeCreationFailure: false
           abortOnChangeStepTimeout: false
           changeCreationTimeout: 10
