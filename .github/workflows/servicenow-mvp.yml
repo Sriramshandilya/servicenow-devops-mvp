@@ -26,3 +26,7 @@ jobs:
           devops-integration-token: ${{ secrets.SN_DEVOPS_INTEGRATION_TOKEN }}
           job-name: "Deploy to Production"
           context-github: ${{ toJson(github) }}
+          # 🔑 KEY SETTINGS
+          abortOnChangeCreationFailure: false
+          abortOnChangeStepTimeout: false
+          changeCreationTimeout: 10
