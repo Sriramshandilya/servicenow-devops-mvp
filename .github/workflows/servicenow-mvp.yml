@@ -58,7 +58,7 @@ jobs:
         uses: ServiceNow/servicenow-devops-change@main
         with:
           instance-url: ${{ secrets.SN_INSTANCE_URL }}
-          tool-id: ${{ secrets.SN_TOOL_ID }}
+          tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
           devops-integration-token: ${{ secrets.SN_TOKEN }}
           job-name: Deploy to Production
 
