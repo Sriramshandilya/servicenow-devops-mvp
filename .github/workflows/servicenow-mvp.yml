@@ -61,6 +61,7 @@ jobs:
           tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
           devops-integration-token: ${{ secrets.SN_TOKEN }}
           job-name: Deploy to Production
+          context-github: ${{ toJson(github) }}
 
           # 🔑 Async / Non-blocking
           abortOnChangeCreationFailure: false
