@@ -59,11 +59,11 @@ jobs:
         with:
           instance-url: ${{ secrets.SN_INSTANCE_URL }}
           tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
-          devops-integration-token: ${{ secrets.SN_TOKEN }}
+          devops-integration-token: ${{ secrets.SN_DEVOPS_INTEGRATION_TOKEN }}
           job-name: Deploy to Production
           context-github: ${{ toJson(github) }}
 
           # 🔑 Async / Non-blocking
-          abortOnChangeCreationFailure: false
+          abortOnChangeCreationFailure: true
           abortOnChangeStepTimeout: false
           changeCreationTimeout: 10
