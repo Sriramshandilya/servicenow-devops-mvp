@@ -58,6 +58,8 @@ jobs:
           abortOnChangeCreationFailure: true
           abortOnChangeStepTimeout: false
           changeCreationTimeout: 2
+          timeout: 5
+          interval: 5
           
       - name: Checkout code
         uses: actions/checkout@v4
