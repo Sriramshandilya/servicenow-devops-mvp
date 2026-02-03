@@ -15,7 +15,7 @@ jobs:
         run: |
           echo "📋 Planning deployment..."
           echo "Checking scope, impact, dependencies"
-          sleep 2
+          sleep 5
           echo "✅ Plan completed"
 
   build:
@@ -26,7 +26,7 @@ jobs:
       - name: Build stage
         run: |
           echo "🏗️ Building application..."
-          sleep 2
+          sleep 5
           echo "✅ Build successful"
 
   test:
@@ -37,7 +37,7 @@ jobs:
       - name: Test stage
         run: |
           echo "🧪 Running tests..."
-          sleep 3
+          sleep 5
           echo "✅ Tests passed"
 
   deploy:
@@ -64,7 +64,7 @@ jobs:
       - name: Simulate deployment
         run: |
           echo "🚀 Deploying application..."
-          sleep 2
+          sleep 5
           echo "✅ Deployment completed"
 
       
