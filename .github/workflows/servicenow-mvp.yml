@@ -55,8 +55,19 @@ jobs:
           tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
           devops-integration-token: ${{ secrets.SN_DEVOPS_INTEGRATION_TOKEN }}
           job-name: Deploy to Production
-          context-github: ${{ toJson(github) }}
           deployment-gate: false   # THIS IS THE KEY to control the approval needed or not
+          context-github: |
+            {
+              "run_id": "${{ github.run_id }}",
+              "run_number": "${{ github.run_number }}",
+              "workflow": "${{ github.workflow }}",
+              "repository": "${{ github.repository }}",
+              "ref": "${{ github.ref }}",
+              "sha": "${{ github.sha }}",
+              "actor": "${{ github.actor }}",
+              "server_url": "${{ github.server_url }}",
+              "run_url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            }
 
           # 🔑 Async / Non-blocking
           abortOnChangeCreationFailure: true
