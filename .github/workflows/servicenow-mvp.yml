@@ -55,7 +55,7 @@ jobs:
           tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
           devops-integration-token: ${{ secrets.SN_DEVOPS_INTEGRATION_TOKEN }}
           job-name: Deploy to Production
-          changeRequestMode: async
+          deployment-gate: false   # THIS IS THE KEY to control the approval needed or not
           context-github: ${{ toJson(github) }}
 
           # 🔑 Async / Non-blocking
