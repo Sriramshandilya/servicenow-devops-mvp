@@ -48,6 +48,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Simulate deployment
+        run: |
+          echo "🚀 Deploying application..."
+          sleep 5
+          echo "✅ Deployment completed"
+
       - name: ServiceNow DevOps Change (Async)
         uses: ServiceNow/servicenow-devops-change@main
         with:
@@ -55,30 +61,11 @@ jobs:
           tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
           devops-integration-token: ${{ secrets.SN_DEVOPS_INTEGRATION_TOKEN }}
           job-name: Deploy to Production
-          deployment-gate: false   # THIS IS THE KEY to control the approval needed or not
-          callback-url: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          orchestration-task-url: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          context-github: |
-            {
-              "run_id": "${{ github.run_id }}",
-              "run_number": "${{ github.run_number }}",
-              "workflow": "${{ github.workflow }}",
-              "repository": "${{ github.repository }}",
-              "ref": "${{ github.ref }}",
-              "sha": "${{ github.sha }}",
-              "actor": "${{ github.actor }}",
-              "server_url": "${{ github.server_url }}",
-              "run_url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-            }
+          context-github: ${{ toJson(github) }}
 
           # 🔑 Async / Non-blocking
           abortOnChangeCreationFailure: true
           abortOnChangeStepTimeout: false
           changeCreationTimeout: 10
-
-      - name: Simulate deployment
-        run: |
-          echo "🚀 Deploying application..."
-          sleep 5
-          echo "✅ Deployment completed"
-
+          timeout: 5
+          interval: 5
