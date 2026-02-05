@@ -53,7 +53,7 @@ jobs:
           devops-integration-token: ${{ secrets.SN_DEVOPS_INTEGRATION_TOKEN }}
           job-name: Deploy to Production
           context-github: ${{ toJson(github) }}
-          
+          change-request: '{"setCloseCode":"true","attributes":{"short_description":"Automated Software Deployment"}}'
           # 🔑 Async / Non-blocking
           abortOnChangeCreationFailure: true
           abortOnChangeStepTimeout: false
