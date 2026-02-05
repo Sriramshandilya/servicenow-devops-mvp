@@ -56,7 +56,15 @@ jobs:
           change-request: '{"setCloseCode":"true",
             "attributes":
               {
-                "short_description":"Automated Software Deployment",
+                "description":"Automated Software Deployment:
+                              Commit message is ${{ github.event.head_commit.message }}
+                              Repository name (owner/repo): ${{ github.repository }}
+                              Repository owner: ${{ github.repository_owner }}
+                              Repository name only: ${{ github.event.repository.name }}
+                              Branch/Tag ref: ${{ github.ref }}
+                              Workflow triggered by: ${{ github.actor }}
+                              Workspace directory: ${{ github.workspace }}
+                              Event name: ${{ github.event_name }}",
                 "requested_by":"bae8cbe1936a32100e5c79befaba10f1"}
               }'
           # 🔑 Async / Non-blocking
