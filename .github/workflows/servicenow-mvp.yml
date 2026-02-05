@@ -48,9 +48,9 @@ jobs:
       - name: ServiceNow DevOps Change (Async)
         uses: ServiceNow/servicenow-devops-change@main
         with:
-          instance-url: ${{ secrets.SN_DEV_INSTANCE_URL }}
-          tool-id: ${{ secrets.SN_DEV_ORCHESTRATION_TOOL_ID }}
-          devops-integration-token: ${{ secrets.SN_DEV_DEVOPS_INTEGRATION_TOKEN }}
+          instance-url: ${{ secrets.SN_INSTANCE_URL }}
+          tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
+          devops-integration-token: ${{ secrets.SN_DEVOPS_INTEGRATION_TOKEN }}
           job-name: Deploy to Production
           context-github: ${{ toJson(github) }}
           
